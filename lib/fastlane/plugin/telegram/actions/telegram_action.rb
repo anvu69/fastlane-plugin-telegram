@@ -10,6 +10,7 @@ module Fastlane
         parse_mode = params[:parse_mode]
         file_path = params[:file]
         mime_type = params[:mime_type]
+        custom_bot_server = params[:custom_bot_server]
 
         file = nil
         if file_path != nil 
@@ -27,7 +28,7 @@ module Fastlane
         end
 
         method = (file == nil ? "sendMessage" : "sendDocument")
-        uri = URI.parse("https://api.telegram.org/bot#{token}/#{method}")
+        uri = URI.parse("#{custom_bot_server != nil ? custom_bot_server : "https://api.telegram.org"}/bot#{token}/#{method}")
         
         http = Net::HTTP.new(uri.host, uri.port)
         if params[:proxy]
@@ -102,6 +103,11 @@ module Fastlane
                                         description: "Proxy URL to be used in network requests. Example: (https://123.45.67.89:80)",
                                            optional: true,
                                                type: String)
+                   FastlaneCore::ConfigItem.new(key: :custom_bot_server,
+                                           env_name: "TELEGRAM_CUSTOM_BOT_SERVER",
+                                        description: "Custom own server bot. Example: (http://123.45.67.89:8081)",
+                                            optional: true,
+                                                type: String)
                 ]
       end
 
