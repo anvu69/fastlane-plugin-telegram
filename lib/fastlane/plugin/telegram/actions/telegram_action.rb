@@ -28,7 +28,9 @@ module Fastlane
         end
 
         method = (file == nil ? "sendMessage" : "sendDocument")
-        uri = URI.parse("#{custom_bot_server != nil ? custom_bot_server : "https://api.telegram.org"}/bot#{token}/#{method}")
+        domain = (custom_bot_server != nil ? custom_bot_server : "https://api.telegram.org")
+        UI.message("Send via: #{domain}")
+        uri = URI.parse("#{domain}/bot#{token}/#{method}")
         
         http = Net::HTTP.new(uri.host, uri.port)
         if params[:proxy]
