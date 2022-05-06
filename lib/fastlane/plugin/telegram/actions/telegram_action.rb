@@ -37,7 +37,7 @@ module Fastlane
           proxy_uri = URI.parse(params[:proxy])
           http = Net::HTTP.new(uri.host, uri.port, proxy_uri.host, proxy_uri.port, proxy_uri.user, proxy_uri.password)
         end
-        http.use_ssl = true
+        http.use_ssl = custom_bot_server != nil ? false : true
 
         require 'net/http/post/multipart'
         text_parameter = (file == nil ? "text" : "caption")
