@@ -102,7 +102,7 @@ module Fastlane
                                            env_name: "TELEGRAM_PROXY",
                                         description: "Proxy URL to be used in network requests. Example: (https://123.45.67.89:80)",
                                            optional: true,
-                                               type: String)
+                                               type: String),
                    FastlaneCore::ConfigItem.new(key: :custom_bot_server,
                                            env_name: "TELEGRAM_CUSTOM_BOT_SERVER",
                                         description: "Custom own server bot. Example: (http://123.45.67.89:8081)",
